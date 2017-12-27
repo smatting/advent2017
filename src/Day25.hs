@@ -109,7 +109,10 @@ initState = TMState A (Tape (Seq.singleton Zero) 0)
 iterN :: (a -> a) -> a -> Int -> a
 iterN f x n =
     if n == 0 then x
-        else seq (f x) (iterN f (f x) (n-1))
+    else 
+        let x' = f x
+            n' = n - 1
+        in seq x' (iterN f x' n')
 
 day25solution1 = do
     contents <- pack <$> readFile "day25_input.txt"
