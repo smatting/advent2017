@@ -99,7 +99,7 @@ runStep program (TMState state tape) =
         Inst writeValue dir nextState = getInst tape inst0 inst1
         tape' = write tape writeValue
         tape'' = move tape' dir
-    in TMState nextState tape''
+    in seq tape'' (TMState nextState tape'')
     where getInst tape inst0 inst1 =
             case currentVal tape of Zero -> inst0
                                     One -> inst1
