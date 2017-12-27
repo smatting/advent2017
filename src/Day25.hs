@@ -118,4 +118,4 @@ day25solution1 = do
     contents <- pack <$> readFile "day25_input.txt"
     let program = fromJust $ parseMaybe programP contents
         tms@(TMState state (Tape s pos)) = iterN (runStep program) initState 12794428
-    seq tms $ print "state computed"
+    print $ Seq.length $ Seq.filter (== One) s
