@@ -36,12 +36,12 @@ day6solution1 = runST $ do
     let xs = [10,3,15,10,5,15,5,15,9,2,5,8,5,2,3,6]
     banks <- newListArray (0, length xs - 1) xs :: ST s (STUArray s Int Int)
     let f banksHistory i = do
-        xs <- getElems banks
-        if xs `member` banksHistory
-        then return i
-        else do
-           redist banks (maxBankdIdx xs)
-           f (S.insert xs banksHistory) (i+1)
+          xs <- getElems banks
+          if xs `member` banksHistory
+          then return i
+          else do
+             redist banks (maxBankdIdx xs)
+             f (S.insert xs banksHistory) (i+1)
     f empty 0
 
 day6solution2 :: Int
@@ -49,11 +49,11 @@ day6solution2 = runST $ do
     let xs = [10,3,15,10,5,15,5,15,9,2,5,8,5,2,3,6]
     banks <- newListArray (0, length xs - 1) xs :: ST s (STUArray s Int Int)
     let f banksHistory i = do
-        xs <- getElems banks
-        if xs `Map.member` banksHistory
-        then let ii = fromJust (Map.lookup xs banksHistory)
-             in return (i - ii)
-        else do
-             redist banks (maxBankdIdx xs)
-             f (Map.insert xs i banksHistory) (i+1)
+          xs <- getElems banks
+          if xs `Map.member` banksHistory
+          then let ii = fromJust (Map.lookup xs banksHistory)
+               in return (i - ii)
+          else do
+               redist banks (maxBankdIdx xs)
+               f (Map.insert xs i banksHistory) (i+1)
     f Map.empty 0 

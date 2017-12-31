@@ -31,6 +31,7 @@ dependencies:
 - vector
 - mtl
 - split
+- parallel
 
 library:
   source-dirs: src
